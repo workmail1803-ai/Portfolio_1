@@ -174,6 +174,9 @@ async function navigate() {
     case 'project':
       await renderProjectDetail(param);
       break;
+    case 'assistant':
+      renderAssistant();
+      break;
     case 'contact':
       renderContact();
       break;
@@ -494,6 +497,381 @@ function renderContact() {
       }, 3000);
     }, 1500);
   });
+}
+
+// =====================================================
+//  AI ASSISTANT
+// =====================================================
+
+const AI_PROVIDERS = {
+  gemini: {
+    name: 'Gemini',
+    label: 'Google Gemini (Free)',
+    keyHint: 'Get free key → <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a>',
+    storageKey: 'portfolio_gemini_key',
+    async call(apiKey, messages) {
+      const contents = messages.map(m => ({
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: m.content }]
+      }));
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+            contents,
+            generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+          })
+        }
+      );
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error?.message || `Gemini API error ${res.status}`);
+      }
+      const data = await res.json();
+      return data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response generated.';
+    }
+  },
+  groq: {
+    name: 'Groq',
+    label: 'Groq / Llama (Free)',
+    keyHint: 'Get free key → <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a>',
+    storageKey: 'portfolio_groq_key',
+    async call(apiKey, messages) {
+      const body = {
+        model: 'llama-3.3-70b-versatile',
+        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
+        temperature: 0.7,
+        max_tokens: 1024
+      };
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error?.message || `Groq API error ${res.status}`);
+      }
+      const data = await res.json();
+      return data.choices?.[0]?.message?.content || 'No response generated.';
+    }
+  }
+};
+
+// ── System Prompt (Knowledge Base) ──
+const SYSTEM_PROMPT = `You are the AI assistant for Nafis Hossain Momen's developer portfolio. You help potential clients and visitors understand Nafis's capabilities, experience, and project portfolio.
+
+ABOUT NAFIS:
+- Full Name: Nafis Hossain Momen
+- Role: Full Stack Web Developer
+- Education: BRAC University (Final Semester), CSE Department, Dhaka, Bangladesh
+- Contact: workmail1803.ai@gmail.com | +880 1756-003283 (WhatsApp)
+- GitHub: github.com/workmail1803-ai
+- Specialization: AI-assisted development — every line of code is precisely debugged and optimized
+
+TECHNICAL SKILLS:
+- Frontend: HTML, CSS, JavaScript, React, Next.js, TypeScript, Tailwind CSS
+- Mobile: Flutter, Dart (cross-platform Android/iOS)
+- Backend: Node.js, Python, Django, Supabase, Firebase
+- Data Science: Jupyter Notebook, Python ML libraries, data analysis
+- Automation: Telegram Bot API, Python scripting
+- Tools: Git, Vite, LaTeX
+
+PROJECT PORTFOLIO — Use these as evidence when answering client questions:
+
+1. Doctors_RX [TypeScript/React] → https://github.com/workmail1803-ai/Doctors_RX
+   Rx Portal: Modern prescription management system for doctors. React + TypeScript + Vite + Supabase + Tailwind CSS. Features: patient dashboard, medicine autosuggest (local & database), dynamic prescription fields, mobile-friendly print studio with auto-scaling A4 layout.
+
+2. active_dream_bot [Python] → https://github.com/workmail1803-ai/active_dream_bot
+   Permission-based private Telegram bot for virtual phone numbers and automated OTP verification. Fully modular, production-ready. Python 3.11+ with Telegram Bot API.
+
+3. Relief-Chain- [JavaScript/React] → https://github.com/workmail1803-ai/Relief-Chain-
+   Disaster relief coordination platform. React + Vite + Supabase. Features: community posts, medical module, shop module, SQL schema for supply chain, real-time coordination.
+
+4. ARAB [TypeScript/Next.js] → https://github.com/workmail1803-ai/ARAB
+   Full-stack delivery and logistics management system. Features: agent dashboard, rider management, order tracking, WooCommerce integration, real-time delivery status.
+
+5. Redwan [TypeScript/Next.js] → https://github.com/workmail1803-ai/Redwan
+   Sweet Delights BD: Premium cake shop website for Bangladesh. Next.js 14 + PWA support + Bengali language + scroll animations + WhatsApp ordering + mobile-first design.
+
+6. Nextup [TypeScript/Next.js] → https://github.com/workmail1803-ai/Nextup
+   Travel and tour booking platform. Next.js + TypeScript + Supabase. Features: destination browsing, package listings, admin dashboard, multilingual FAQ (Bengali/English), full SEO.
+
+7. Flutter_Project [Dart] → https://github.com/workmail1803-ai/Flutter_Project
+   Wondr NEUB: Flutter mobile app for university services. Cross-platform (Android + iOS).
+
+8. ML_Project [Python/Jupyter] → https://github.com/workmail1803-ai/ML_Project
+   Malware Analysis using Machine Learning. Malware classification and threat detection with CSV datasets, threshold analysis, model training via Jupyter Notebooks.
+
+9. MIM_Project [Python/Django] → https://github.com/workmail1803-ai/MIM_Project
+   Wond'r NEUB: Django-based study tour booking system. Full-stack Python web app with booking management, student registration, tour packages.
+
+10. NUB_PAGE [TypeScript/React] → https://github.com/workmail1803-ai/NUB_PAGE
+    University web portal. React + TypeScript + Vite. Modern SPA with component-based architecture.
+
+11. prescription [JavaScript] → https://github.com/workmail1803-ai/prescription
+    Doctor prescription tool with medicine database, prescription writing, visit tracking, print-ready templates. Vanilla HTML/CSS/JS.
+
+12. Fahim_Vai [TypeScript/Next.js] → https://github.com/workmail1803-ai/Fahim_Vai
+    Professional business website. Next.js + TypeScript. Clean modern single-page design.
+
+13. Mahin_Buiseness [HTML/LaTeX] → https://github.com/workmail1803-ai/Mahin_Buiseness
+    Business studies lecture booklet and slide presentation. LaTeX-generated PDF with HTML viewer.
+
+14. Portfolio_1 [HTML/CSS/JS] → https://github.com/workmail1803-ai/Portfolio_1
+    This portfolio website. Vintage wiki-themed, dynamically fetches GitHub data, renders READMEs as case studies.
+
+INSTRUCTIONS — Follow these strictly:
+1. Always refer to Nafis in THIRD PERSON: "Nafis has built...", "Nafis can help with...", "Nafis specializes in..."
+2. When a client describes a need, match it with the MOST RELEVANT projects above and provide the GitHub URL as proof.
+3. Be professional, confident, and enthusiastic about Nafis's capabilities.
+4. If asked about pricing or rates, say: "For a custom quote, please contact Nafis directly at workmail1803.ai@gmail.com or via WhatsApp at +880 1756-003283."
+5. If asked something completely unrelated to Nafis's work or tech, politely redirect: "I'm here to help with questions about Nafis's development work and portfolio. How can I help you with a project?"
+6. Keep responses concise but informative (2-4 paragraphs max).
+7. When referencing a project, ALWAYS include the GitHub URL.
+8. Highlight Nafis's unique strength: AI-assisted development ensuring precise, thoroughly debugged code.
+9. Format responses with markdown: use **bold** for emphasis, bullet points for lists, and [links](url) for repos.`;
+
+// ── Chat State ──
+let chatHistory = [];
+let currentProvider = 'gemini';
+
+function getApiKey(provider) {
+  try { return localStorage.getItem(AI_PROVIDERS[provider].storageKey) || ''; }
+  catch { return ''; }
+}
+function setApiKey(provider, key) {
+  try { localStorage.setItem(AI_PROVIDERS[provider].storageKey, key); }
+  catch {}
+}
+
+// ── Render Assistant Page ──
+function renderAssistant() {
+  const provider = AI_PROVIDERS[currentProvider];
+  const hasKey = !!getApiKey(currentProvider);
+
+  container.innerHTML = `
+    <div class="page-enter">
+      <div class="chat-header">
+        <h1>Ask Nafis's AI</h1>
+        <p>AI assistant trained on Nafis's complete project portfolio. Ask about skills, experience, or describe your project needs — the AI will match them with real work and GitHub repos.</p>
+      </div>
+
+      <!-- Provider Tabs -->
+      <div class="provider-tabs" id="providerTabs">
+        ${Object.entries(AI_PROVIDERS).map(([key, p]) => `
+          <button class="provider-tab ${key === currentProvider ? 'active' : ''}" data-provider="${key}">${p.label}</button>
+        `).join('')}
+      </div>
+
+      <!-- API Key Setup / Status -->
+      <div id="apiSection">
+        ${hasKey ? renderApiStatus() : renderApiSetup()}
+      </div>
+
+      <!-- Chat Window -->
+      <div class="chat-window">
+        <div class="chat-messages" id="chatMessages">
+          ${chatHistory.length === 0 ? renderWelcome() : chatHistory.map(m => renderMessage(m.role, m.content)).join('')}
+        </div>
+        <div class="chat-input-bar">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Ask about Nafis's skills, projects, or describe your needs..." ${!hasKey ? 'disabled' : ''}>
+          <button class="chat-send" id="chatSend" ${!hasKey ? 'disabled' : ''}>Send</button>
+        </div>
+      </div>
+
+      <!-- Suggestions -->
+      <div class="chat-suggestions" id="chatSuggestions">
+        <button class="chat-suggestion" data-q="What technologies does Nafis work with?">What tech stack does Nafis use?</button>
+        <button class="chat-suggestion" data-q="I need an e-commerce website for my business. Can Nafis help?">I need an e-commerce website</button>
+        <button class="chat-suggestion" data-q="Has Nafis built any mobile apps?">Has Nafis built mobile apps?</button>
+        <button class="chat-suggestion" data-q="I need a Telegram bot for my business. Can Nafis build one?">Can Nafis build a Telegram bot?</button>
+        <button class="chat-suggestion" data-q="I need a management dashboard with database. What has Nafis done in this area?">I need a management dashboard</button>
+        <button class="chat-suggestion" data-q="Does Nafis have experience with healthcare or medical software?">Medical software experience?</button>
+      </div>
+    </div>
+  `;
+
+  bindChatEvents();
+  scrollChat();
+}
+
+function renderApiSetup() {
+  const provider = AI_PROVIDERS[currentProvider];
+  return `
+    <div class="api-setup">
+      <div class="api-setup-title">Connect ${provider.name} API</div>
+      <p>To power the AI assistant, enter your free ${provider.name} API key. Your key is stored locally in your browser and never sent to any server except ${provider.name}'s API.</p>
+      <div class="api-setup-row">
+        <input type="password" class="api-key-input" id="apiKeyInput" placeholder="Paste your API key here...">
+        <button class="api-key-btn" id="apiKeyBtn">Connect</button>
+      </div>
+      <p class="api-setup-hint">${provider.keyHint}</p>
+    </div>
+  `;
+}
+
+function renderApiStatus() {
+  const provider = AI_PROVIDERS[currentProvider];
+  const key = getApiKey(currentProvider);
+  const masked = key.substring(0, 6) + '•'.repeat(12) + key.slice(-4);
+  return `
+    <div class="api-status">
+      <span class="api-status-dot connected"></span>
+      <span>${provider.name} connected — ${masked}</span>
+      <button class="api-status-change" id="apiChangeBtn">Change Key</button>
+    </div>
+  `;
+}
+
+function renderWelcome() {
+  return `
+    <div class="chat-msg chat-msg-ai">
+      <div class="chat-msg-label">Nafis's AI Assistant</div>
+      <div class="chat-msg-bubble">
+        <p><strong>Welcome!</strong> I'm Nafis's AI portfolio assistant. I have detailed knowledge of all his projects, technical skills, and experience.</p>
+        <p>You can ask me things like:</p>
+        <ul>
+          <li>"Can Nafis build a website for my business?"</li>
+          <li>"What experience does he have with React and Next.js?"</li>
+          <li>"I need a booking system — has he done something similar?"</li>
+        </ul>
+        <p>I'll match your needs with <strong>real projects</strong> from his GitHub portfolio and provide direct links as evidence.</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderMessage(role, content) {
+  if (role === 'user') {
+    return `
+      <div class="chat-msg chat-msg-user">
+        <div class="chat-msg-label">You</div>
+        <div class="chat-msg-bubble">${escapeHtml(content)}</div>
+      </div>
+    `;
+  } else {
+    return `
+      <div class="chat-msg chat-msg-ai">
+        <div class="chat-msg-label">Nafis's AI Assistant</div>
+        <div class="chat-msg-bubble">${marked.parse(content)}</div>
+      </div>
+    `;
+  }
+}
+
+function renderTyping() {
+  return `
+    <div class="chat-msg chat-msg-ai" id="typingIndicator">
+      <div class="chat-msg-label">Nafis's AI Assistant</div>
+      <div class="chat-typing"><span></span><span></span><span></span></div>
+    </div>
+  `;
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function scrollChat() {
+  const el = document.getElementById('chatMessages');
+  if (el) el.scrollTop = el.scrollHeight;
+}
+
+// ── Chat Events ──
+function bindChatEvents() {
+  // Provider tabs
+  document.getElementById('providerTabs')?.addEventListener('click', (e) => {
+    const tab = e.target.closest('.provider-tab');
+    if (!tab) return;
+    currentProvider = tab.dataset.provider;
+    renderAssistant();
+  });
+
+  // API key connect
+  document.getElementById('apiKeyBtn')?.addEventListener('click', () => {
+    const input = document.getElementById('apiKeyInput');
+    const key = input.value.trim();
+    if (!key) return;
+    setApiKey(currentProvider, key);
+    renderAssistant();
+  });
+  document.getElementById('apiKeyInput')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') document.getElementById('apiKeyBtn')?.click();
+  });
+
+  // Change key
+  document.getElementById('apiChangeBtn')?.addEventListener('click', () => {
+    try { localStorage.removeItem(AI_PROVIDERS[currentProvider].storageKey); }
+    catch {}
+    renderAssistant();
+  });
+
+  // Send message
+  const sendMsg = () => {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    sendChatMessage(text);
+  };
+
+  document.getElementById('chatSend')?.addEventListener('click', sendMsg);
+  document.getElementById('chatInput')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+  });
+
+  // Suggestions
+  document.getElementById('chatSuggestions')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.chat-suggestion');
+    if (!btn || !getApiKey(currentProvider)) return;
+    sendChatMessage(btn.dataset.q);
+  });
+}
+
+// ── Send & Receive ──
+async function sendChatMessage(text) {
+  const apiKey = getApiKey(currentProvider);
+  if (!apiKey) return;
+
+  // Add user message
+  chatHistory.push({ role: 'user', content: text });
+  const messagesEl = document.getElementById('chatMessages');
+  messagesEl.innerHTML = chatHistory.map(m => renderMessage(m.role, m.content)).join('');
+  messagesEl.innerHTML += renderTyping();
+  scrollChat();
+
+  // Disable input while waiting
+  const sendBtn = document.getElementById('chatSend');
+  const inputEl = document.getElementById('chatInput');
+  if (sendBtn) sendBtn.disabled = true;
+  if (inputEl) inputEl.disabled = true;
+
+  try {
+    const provider = AI_PROVIDERS[currentProvider];
+    const reply = await provider.call(apiKey, chatHistory);
+    chatHistory.push({ role: 'assistant', content: reply });
+  } catch (err) {
+    chatHistory.push({
+      role: 'assistant',
+      content: `**Error:** ${err.message}\n\nPlease check your API key and try again.`
+    });
+  }
+
+  // Remove typing, render all messages
+  messagesEl.innerHTML = chatHistory.map(m => renderMessage(m.role, m.content)).join('');
+  scrollChat();
+
+  if (sendBtn) sendBtn.disabled = false;
+  if (inputEl) { inputEl.disabled = false; inputEl.focus(); }
 }
 
 // ── 404 ──
