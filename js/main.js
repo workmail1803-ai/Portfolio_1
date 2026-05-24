@@ -566,13 +566,13 @@ PROJECT PORTFOLIO — Use these as evidence of your work when answering queries:
     This portfolio website. Vintage wiki-themed, dynamically fetches GitHub data, renders READMEs as case studies.
 
 INSTRUCTIONS — Follow these strictly:
-1. Always speak in the FIRST PERSON: "I have built...", "I can help with...", "I specialize in...", "My GitHub profile is..."
-2. When a client describes a requirement, match it with the MOST RELEVANT projects from my portfolio above and provide the GitHub URL to prove that I have actually done this before.
-3. Be professional, confident, and enthusiastic about my capabilities and projects.
-4. If asked about pricing, rates, or hiring me, say: "For a custom quote, please contact me directly at workmail1803.ai@gmail.com or via WhatsApp at +880 1756-003283."
-5. If asked something completely unrelated to my development work or tech stack, politely steer them back: "I'd love to chat about how I can build this feature or work on your project. How can I help you today?"
-6. Keep responses relatively concise but complete and professional (2-4 paragraphs max).
-7. When referencing a project, ALWAYS include the GitHub URL.
+1. Speak in the FIRST PERSON: "I have built...", "I can help with...", "I specialize in...", "My GitHub profile is..."
+2. **Be Conversational (Human-to-Human)**: Do not dump lists of repositories or generic summaries immediately, especially on greetings or simple questions. If someone says "Hi", "Hello", or asks a general question, reply warmly and naturally as a human developer and salesman. Ask them about their project goals, business, or target audience.
+3. **Professional Salesman Role**: Act like a consultative salesman. Ask qualifying questions to understand what the user wants to build. Show excitement, build rapport, and highlight how your skills can solve their specific business problem.
+4. **Contextual Proof**: Only mention a specific project from the portfolio when it is directly relevant to what the user is discussing or asking for. When you do reference a project, explain *why* it matches their needs, how it shows you can do the job, and ALWAYS provide the GitHub link as concrete proof of your work.
+5. If asked about pricing, rates, or hiring me, keep it professional: "For a custom quote, please contact me directly at workmail1803.ai@gmail.com or via WhatsApp at +880 1756-003283."
+6. If asked something completely unrelated to my development work or tech stack, politely guide the conversation back: "I'd love to chat about how I can build this feature or work on your project. How can I help you today?"
+7. Keep responses concise, engaging, and conversational. Do not overwhelm the user with walls of text or list out all 14 repositories at once. Use bullet points only when listing items makes the reading much cleaner for the client.
 8. Emphasize my unique strength: AI-assisted development ensuring precision, thoroughly debugged code, and high efficiency.
 9. Format responses with markdown: use **bold** for emphasis, bullet points for lists, and [links](url) for repos.`;
 
@@ -656,8 +656,8 @@ function renderAssistant() {
   container.innerHTML = `
     <div class="page-enter">
       <div class="chat-header">
-        <h1>Ask Nafis's AI</h1>
-        <p>AI assistant trained on Nafis's complete project portfolio. Ask about skills, experience, or describe your project needs â€” the AI will match them with real work Nafis has done.</p>
+        <h1>Chat with Nafis</h1>
+        <p>Chat directly with me. Ask about my skills, experience, or describe your project requirements — I will help you find the right solution and share matching work I've done.</p>
       </div>
 
       <!-- API Key Section (only shows in fallback mode) -->
@@ -669,19 +669,19 @@ function renderAssistant() {
           ${chatHistory.length === 0 ? renderWelcome() : chatHistory.map(m => renderMessage(m.role, m.content)).join('')}
         </div>
         <div class="chat-input-bar">
-          <input type="text" class="chat-input" id="chatInput" placeholder="Ask about Nafis's skills, projects, or describe your needs...">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Ask about my skills, projects, or tell me about your project needs...">
           <button class="chat-send" id="chatSend">Send</button>
         </div>
       </div>
 
       <!-- Suggestions -->
       <div class="chat-suggestions" id="chatSuggestions">
-        <button class="chat-suggestion" data-q="What technologies does Nafis work with?">What tech stack does Nafis use?</button>
-        <button class="chat-suggestion" data-q="I need an e-commerce website for my business. Can Nafis help?">I need an e-commerce website</button>
-        <button class="chat-suggestion" data-q="Has Nafis built any mobile apps?">Has Nafis built mobile apps?</button>
-        <button class="chat-suggestion" data-q="I need a Telegram bot for my business. Can Nafis build one?">Can Nafis build a Telegram bot?</button>
-        <button class="chat-suggestion" data-q="I need a management dashboard with database. What has Nafis done in this area?">I need a management dashboard</button>
-        <button class="chat-suggestion" data-q="Does Nafis have experience with healthcare or medical software?">Medical software experience?</button>
+        <button class="chat-suggestion" data-q="What is your tech stack?">What is your tech stack?</button>
+        <button class="chat-suggestion" data-q="I need an e-commerce website for my business. Can you help me?">Can you build an e-commerce site?</button>
+        <button class="chat-suggestion" data-q="Have you built any cross-platform mobile apps?">Have you built mobile apps?</button>
+        <button class="chat-suggestion" data-q="I need a custom Telegram bot. What is your experience with bots?">Can you build a Telegram bot?</button>
+        <button class="chat-suggestion" data-q="Have you built a management dashboard with database integration?">I need a management dashboard</button>
+        <button class="chat-suggestion" data-q="Do you have experience building healthcare or medical software?">Medical software experience?</button>
       </div>
     </div>
   `;
@@ -753,16 +753,11 @@ async function initAssistant() {
 function renderWelcome() {
   return `
     <div class="chat-msg chat-msg-ai">
-      <div class="chat-msg-label">Nafis's AI Assistant</div>
+      <div class="chat-msg-label">Nafis Momen</div>
       <div class="chat-msg-bubble">
-        <p><strong>Welcome!</strong> I'm Nafis's AI portfolio assistant. I have detailed knowledge of all his projects, technical skills, and experience.</p>
-        <p>You can ask me things like:</p>
-        <ul>
-          <li>"Can Nafis build a website for my business?"</li>
-          <li>"What experience does he have with React and Next.js?"</li>
-          <li>"I need a booking system â€” has he done something similar?"</li>
-        </ul>
-        <p>I'll match your needs with <strong>real projects</strong> from his GitHub portfolio and provide direct links as evidence.</p>
+        <p><strong>Hello!</strong> I'm Nafis Hossain Momen. Welcome to my portfolio chat.</p>
+        <p>I'm a Full Stack Web & Mobile Developer specializing in building high-quality, optimized web applications, cross-platform mobile apps, and backend automation tools.</p>
+        <p>How can I help you today? Tell me about your project requirements or what you are looking to build, and I will share my relevant experience and works with you!</p>
       </div>
     </div>
   `;
@@ -779,7 +774,7 @@ function renderMessage(role, content) {
   } else {
     return `
       <div class="chat-msg chat-msg-ai">
-        <div class="chat-msg-label">Nafis's AI Assistant</div>
+        <div class="chat-msg-label">Nafis Momen</div>
         <div class="chat-msg-bubble">${marked.parse(content)}</div>
       </div>
     `;
@@ -789,7 +784,7 @@ function renderMessage(role, content) {
 function renderTyping() {
   return `
     <div class="chat-msg chat-msg-ai" id="typingIndicator">
-      <div class="chat-msg-label">Nafis's AI Assistant</div>
+      <div class="chat-msg-label">Nafis Momen</div>
       <div class="chat-typing"><span></span><span></span><span></span></div>
     </div>
   `;
