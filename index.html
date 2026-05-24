@@ -3,487 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nafis Hossain Momen | Full Stack Web Developer from BRAC University. Building modern, scalable web experiences with AI-powered precision.">
-    <meta name="keywords" content="Nafis Hossain Momen, Full Stack Developer, Web Developer, BRAC University, Portfolio, Bangladesh">
+    <meta name="description" content="Nafis Hossain Momen | Full Stack Web Developer Portfolio. BRAC University.">
     <meta name="author" content="Nafis Hossain Momen">
-    <meta property="og:title" content="Nafis Hossain Momen | Full Stack Web Developer">
-    <meta property="og:description" content="Building modern web experiences with AI-powered precision. BRACU Final Semester.">
-    <meta property="og:type" content="website">
-    <title>Nafis Hossain Momen | Full Stack Web Developer</title>
+    <title>Nafis Hossain Momen | Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- ===== NAVIGATION ===== -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#hero" class="nav-logo">
-                <span class="logo-bracket">&lt;</span>NHM<span class="logo-bracket">/&gt;</span>
+        <div class="nav-inner">
+            <a href="#/home" class="nav-logo">
+                <span class="logo-star">&#9733;</span> N.H. MOMEN
             </a>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#hero" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <a href="#contact" class="nav-cta">Hire Me</a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="nav-links" id="navLinks">
+                <a href="#/home" class="nav-link" data-page="home">Home</a>
+                <a href="#/projects" class="nav-link" data-page="projects">Projects</a>
+                <a href="#/contact" class="nav-link" data-page="contact">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
 
-    <!-- ===== HERO SECTION ===== -->
-    <section class="hero" id="hero">
-        <canvas class="hero-particles" id="heroParticles"></canvas>
-        <div class="hero-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="badge-dot"></span>
-                Available for Freelance Work
-            </div>
-            <h1 class="hero-title">
-                <span class="hero-greeting">Hi, I'm</span>
-                <span class="hero-name">Nafis Hossain<br>Momen</span>
-            </h1>
-            <p class="hero-subtitle">
-                <span class="typed-text" id="typedText"></span><span class="cursor">|</span>
-            </p>
-            <p class="hero-description">
-                BRAC University | Final Semester &bull; Building pixel-perfect, AI-refined digital experiences with precision debugging
-            </p>
-            <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary">
-                    <span>View My Work</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                <a href="#contact" class="btn btn-outline">
-                    <span>Let's Talk</span>
-                </a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number" data-count="15">0</span><span class="stat-plus">+</span>
-                    <span class="stat-label">Projects</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat">
-                    <span class="stat-number" data-count="8">0</span><span class="stat-plus">+</span>
-                    <span class="stat-label">Technologies</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat">
-                    <span class="stat-number" data-count="2">0</span><span class="stat-plus">+</span>
-                    <span class="stat-label">Years Coding</span>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <span>Scroll Down</span>
-        </div>
-    </section>
-
-    <!-- ===== ABOUT SECTION ===== -->
-    <section class="about" id="about">
-        <div class="section-container">
-            <div class="section-header" data-reveal>
-                <span class="section-tag">About Me</span>
-                <h2 class="section-title">Crafting Digital <span class="gradient-text">Experiences</span></h2>
-                <p class="section-subtitle">A passionate developer who turns ideas into elegant, functional solutions</p>
-            </div>
-            <div class="bento-grid" data-reveal>
-                <!-- Bio Card -->
-                <div class="bento-card bento-bio">
-                    <div class="bento-card-inner">
-                        <div class="bio-avatar">
-                            <div class="avatar-placeholder">
-                                <span>NHM</span>
-                            </div>
-                            <div class="avatar-status"></div>
-                        </div>
-                        <h3>Nafis Hossain Momen</h3>
-                        <p class="bio-role">Full Stack Web Developer</p>
-                        <p class="bio-text">Final semester student at BRAC University with a passion for building modern web applications. I specialize in AI-assisted development, ensuring every line of code is precisely debugged and optimized.</p>
-                    </div>
-                </div>
-                <!-- Stats Cards -->
-                <div class="bento-card bento-stat" data-reveal>
-                    <div class="stat-icon">🎓</div>
-                    <div class="stat-info">
-                        <span class="stat-value">BRACU</span>
-                        <span class="stat-desc">Final Semester</span>
-                    </div>
-                </div>
-                <div class="bento-card bento-stat" data-reveal>
-                    <div class="stat-icon">🚀</div>
-                    <div class="stat-info">
-                        <span class="stat-value">15+</span>
-                        <span class="stat-desc">GitHub Projects</span>
-                    </div>
-                </div>
-                <div class="bento-card bento-stat" data-reveal>
-                    <div class="stat-icon">🤖</div>
-                    <div class="stat-info">
-                        <span class="stat-value">AI-First</span>
-                        <span class="stat-desc">Development Approach</span>
-                    </div>
-                </div>
-                <!-- Tech Stack Card -->
-                <div class="bento-card bento-tech" data-reveal>
-                    <h4>Tech Stack</h4>
-                    <div class="tech-grid">
-                        <div class="tech-item" data-tooltip="HTML5">
-                            <svg viewBox="0 0 128 128"><path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"/><path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"/><path fill="#EBEBEB" d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z"/><path fill="#fff" d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z"/></svg>
-                        </div>
-                        <div class="tech-item" data-tooltip="CSS3">
-                            <svg viewBox="0 0 128 128"><path fill="#1572B6" d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543z"/><path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16z"/><path fill="#fff" d="M64.001 51.429h18.302l1.264-14.163H64.001V24.208h34.682l-.332 3.711-3.4 38.114h-30.95z"/><path fill="#EBEBEB" d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018z"/><path fill="#fff" d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881z"/><path fill="#EBEBEB" d="M64.048 24.208v13.058H30.64l-.277-3.108-.63-7.045-.331-2.905zm-.047 27.221v13.057H46.119l-.277-3.108-.631-7.044-.33-2.905z"/></svg>
-                        </div>
-                        <div class="tech-item" data-tooltip="JavaScript">
-                            <svg viewBox="0 0 128 128"><path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z"/><path fill="#323330" d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.36.326 12.19-.728 13.972-1.665 3.527-5.936 3.108-7.875 2.451-1.997-1.033-3.011-2.482-4.193-4.544l-.052-.091c-2.751 1.586-5.498 3.174-8.257 4.76 1.605 3.579 4.197 6.601 7.636 8.548 5.047 2.843 11.783 3.592 18.966 1.512 4.676-1.655 8.696-5.108 10.398-10.397 2.453-6.119 1.862-13.354 1.862-20.348V58.943z"/></svg>
-                        </div>
-                        <div class="tech-item" data-tooltip="React">
-                            <svg viewBox="0 0 128 128"><g fill="#61DAFB"><circle cx="64" cy="64" r="11.4"/><path d="M107.3 45.2c-2.2-.8-4.5-1.6-6.9-2.3.6-2.4 1.1-4.8 1.5-7.1 2.1-13.2-.2-22.5-6.6-26.1-1.9-1.1-4-1.6-6.4-1.6-7 0-15.9 5.2-24.9 13.9-9-8.7-17.9-13.9-24.9-13.9-2.4 0-4.5.5-6.4 1.6-6.4 3.7-8.7 13-6.6 26.1.4 2.3.9 4.7 1.5 7.1-2.4.7-4.7 1.4-6.9 2.3C8.2 50 1.4 56.6 1.4 64s6.9 14 19.3 18.8c2.2.8 4.5 1.6 6.9 2.3-.6 2.4-1.1 4.8-1.5 7.1-2.1 13.2.2 22.5 6.6 26.1 1.9 1.1 4 1.6 6.4 1.6 7.1 0 16-5.2 24.9-13.9 9 8.7 17.9 13.9 24.9 13.9 2.4 0 4.5-.5 6.4-1.6 6.4-3.7 8.7-13 6.6-26.1-.4-2.3-.9-4.7-1.5-7.1 2.4-.7 4.7-1.4 6.9-2.3 12.5-4.8 19.3-11.4 19.3-18.8s-6.8-14-19.3-18.8zM92.5 14.7c4.1 2.4 5.5 9.8 3.8 20.3-.3 2.1-.8 4.3-1.4 6.6-5.2-1.2-10.7-2-16.5-2.5-3.4-4.8-6.9-9.1-10.4-13 7.4-7.3 14.9-12.3 21-12.3 1.3 0 2.5.3 3.5.9zM81.3 74c-1.8 3.2-3.9 6.4-6.1 9.6-3.7.3-7.4.4-11.2.4-3.9 0-7.6-.1-11.2-.4-2.2-3.2-4.2-6.4-6-9.6-1.9-3.3-3.7-6.7-5.3-10 1.6-3.3 3.4-6.7 5.3-10 1.8-3.2 3.9-6.4 6.1-9.6 3.7-.3 7.4-.4 11.2-.4 3.9 0 7.6.1 11.2.4 2.2 3.2 4.2 6.4 6 9.6 1.9 3.3 3.7 6.7 5.3 10-1.7 3.3-3.4 6.6-5.3 10zm8.3-3.3c1.5 3.5 2.7 6.9 3.8 10.3-3.4.8-7 1.4-10.8 1.9 1.2-1.9 2.5-3.9 3.6-6 1.2-2.1 2.3-4.2 3.4-6.2zM64 97.8c-2.4-2.6-4.7-5.4-6.9-8.3 2.3.1 4.6.2 6.9.2 2.3 0 4.6-.1 6.9-.2-2.2 2.9-4.5 5.7-6.9 8.3zm-18.6-15c-3.8-.5-7.4-1.1-10.8-1.9 1.1-3.3 2.3-6.8 3.8-10.3 1.1 2 2.2 4.1 3.4 6.1 1.2 2.2 2.4 4.1 3.6 6.1zm-7-25.5c-1.5-3.5-2.7-6.9-3.8-10.3 3.4-.8 7-1.4 10.8-1.9-1.2 1.9-2.5 3.9-3.6 6-1.2 2.1-2.3 4.2-3.4 6.2zM64 30.2c2.4 2.6 4.7 5.4 6.9 8.3-2.3-.1-4.6-.2-6.9-.2-2.3 0-4.6.1-6.9.2 2.2-2.9 4.5-5.7 6.9-8.3zm22.2 21l-3.6-6c3.8.5 7.4 1.1 10.8 1.9-1.1 3.3-2.3 6.8-3.8 10.3-1.1-2.1-2.2-4.2-3.4-6.2zM31.7 35c-1.7-10.5-.3-17.9 3.8-20.3 1-.6 2.2-.9 3.5-.9 6 0 13.5 4.9 21 12.3-3.5 3.8-7 8.2-10.4 13-5.8.5-11.3 1.4-16.5 2.5-.6-2.3-1-4.5-1.4-6.6zM7 64c0-4.7 5.7-9.7 15.7-13.4 2-.8 4.2-1.5 6.4-2.1 1.6 5 3.6 10.3 6 15.6-2.4 5.3-4.5 10.5-6 15.5C15.3 75.6 7 69.6 7 64zm28.5 49.3c-4.1-2.4-5.5-9.8-3.8-20.3.3-2.1.8-4.3 1.4-6.6 5.2 1.2 10.7 2 16.5 2.5 3.4 4.8 6.9 9.1 10.4 13-7.4 7.3-14.9 12.3-21 12.3-1.3 0-2.5-.3-3.5-.9zM96.3 93c1.7 10.5.3 17.9-3.8 20.3-1 .6-2.2.9-3.5.9-6 0-13.5-4.9-21-12.3 3.5-3.8 7-8.2 10.4-13 5.8-.5 11.3-1.4 16.5-2.5.6 2.3 1 4.5 1.4 6.6zm9-15.6c-2 .8-4.2 1.5-6.4 2.1-1.6-5-3.6-10.3-6-15.6 2.4-5.3 4.5-10.5 6-15.5 13.8 4 22.1 10 22.1 15.6 0 4.7-5.8 9.7-15.7 13.4z"/></g></svg>
-                        </div>
-                        <div class="tech-item" data-tooltip="Node.js">
-                            <svg viewBox="0 0 128 128"><path fill="#83CD29" d="M112.771 30.334L68.674 4.729c-2.781-1.584-6.402-1.584-9.205 0L14.901 30.334C12.031 31.985 10 35.088 10 38.407v51.142c0 3.319 2.084 6.423 4.954 8.083l11.775 6.688c5.628 2.772 7.617 2.772 10.178 2.772 8.333 0 13.093-5.039 13.093-13.828v-50.49c0-.713-.371-1.774-1.071-1.774h-5.623C42.594 41 41 42.061 41 42.773v50.49c0 3.896-3.524 7.773-10.11 4.48L18.723 90.73c-.424-.23-.723-.693-.723-1.181V38.407c0-.482.555-.966.982-1.213l44.424-25.561c.415-.235 1.025-.235 1.439 0l43.882 25.555c.42.253.272.722.272 1.219v51.142c0 .488.183.963-.232 1.198l-44.086 25.576c-.378.227-.847.227-1.261 0l-11.307-6.749c-.341-.198-.746-.269-1.073-.086-3.146 1.783-3.726 2.02-6.677 3.043-.726.253-1.797.692.41 1.929l14.798 8.754a9.294 9.294 0 004.647 1.246c1.642 0 3.25-.426 4.667-1.246l43.885-25.582c2.87-1.672 4.23-4.764 4.23-8.083V38.407c0-3.319-1.36-6.414-4.229-8.073zM77.91 81.445c-11.726 0-14.309-3.235-15.17-9.066-.1-.628-.633-1.379-1.272-1.379h-5.731c-.71 0-1.279.86-1.279 1.566 0 7.466 4.059 16.512 23.453 16.512 14.039 0 22.088-5.455 22.088-15.109 0-9.572-6.467-12.084-20.082-13.886-13.762-1.819-15.16-2.738-15.16-5.962 0-2.658 1.184-6.203 11.374-6.203 9.105 0 12.461 1.954 13.842 8.091.118.577.645 1.024 1.237 1.024h5.78c.378 0 .726-.2.967-.473.237-.277.329-.634.282-.979-1.005-9.673-8.199-14.172-22.108-14.172-12.637 0-20.178 5.337-20.178 14.29 0 9.698 7.5 12.378 19.641 13.564 14.514 1.418 15.637 3.499 15.637 6.328 0 4.899-3.94 6.998-13.183 6.998z"/></svg>
-                        </div>
-                        <div class="tech-item" data-tooltip="Python">
-                            <svg viewBox="0 0 128 128"><linearGradient id="pyA" gradientUnits="userSpaceOnUse" x1="12.959" y1="12.039" x2="68.257" y2="67.337"><stop offset="0" stop-color="#387EB8"/><stop offset="1" stop-color="#366994"/></linearGradient><path fill="url(#pyA)" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z"/><linearGradient id="pyB" gradientUnits="userSpaceOnUse" x1="59.159" y1="105.351" x2="119.553" y2="44.957"><stop offset="0" stop-color="#FFE052"/><stop offset="1" stop-color="#FFC331"/></linearGradient><path fill="url(#pyB)" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z"/></svg>
-                        </div>
-                        <div class="tech-item" data-tooltip="Flutter">
-                            <svg viewBox="0 0 128 128"><path fill="#44D1FD" d="M14.3 64L60.6 118H92.3L46 64 92.3 10H60.6z"/><path fill="#1FBCFD" d="M60.6 118l31.7-31.7L60.6 54.6H92.3L124 86.3 92.3 118z" opacity=".5"/><path fill="#44D1FD" d="M92.3 54.6H60.6L76.4 70.4l15.9 15.9L124 54.6z"/></svg>
-                        </div>
-                        <div class="tech-item" data-tooltip="Git">
-                            <svg viewBox="0 0 128 128"><path fill="#F34F29" d="M124.737 58.378L69.621 3.264c-3.172-3.174-8.32-3.174-11.497 0L46.68 14.71l14.518 14.518c3.375-1.139 7.243-.375 9.932 2.314 2.703 2.706 3.461 6.607 2.294 9.993l13.992 13.993c3.385-1.167 7.292-.413 9.994 2.295 3.78 3.777 3.78 9.9 0 13.679a9.673 9.673 0 01-13.683 0 9.677 9.677 0 01-2.105-10.521L68.574 47.933l-.002 34.341a9.708 9.708 0 012.559 1.828c3.778 3.777 3.778 9.898 0 13.683-3.779 3.777-9.904 3.777-13.679 0-3.778-3.784-3.778-9.905 0-13.683a9.65 9.65 0 013.167-2.11V47.333a9.581 9.581 0 01-3.167-2.111c-2.862-2.86-3.551-7.06-2.083-10.576L41.056 20.333 3.264 58.123a8.133 8.133 0 000 11.5l55.117 55.114c3.174 3.174 8.32 3.174 11.499 0l54.858-54.858a8.135 8.135 0 00-.001-11.501z"/></svg>
-                        </div>
-                    </div>
-                </div>
-                <!-- Coding Philosophy Card -->
-                <div class="bento-card bento-philosophy" data-reveal>
-                    <div class="philosophy-icon">⚡</div>
-                    <h4>My Approach</h4>
-                    <p>Coding with AI precision: every bug gets squashed, every line gets optimized. I leverage cutting-edge AI tools to write cleaner, faster, and more reliable code.</p>
-                    <div class="philosophy-tags">
-                        <span class="tag">AI-Assisted</span>
-                        <span class="tag">Clean Code</span>
-                        <span class="tag">Precision Debug</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== SERVICES SECTION ===== -->
-    <section class="services" id="services">
-        <div class="section-container">
-            <div class="section-header" data-reveal>
-                <span class="section-tag">What I Do</span>
-                <h2 class="section-title">My <span class="gradient-text">Services</span></h2>
-                <p class="section-subtitle">Comprehensive web solutions tailored to your business needs</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card glass-card" data-reveal>
-                    <div class="service-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-                    </div>
-                    <h3>Web Development</h3>
-                    <p>Building responsive, high-performance websites and web applications using modern frameworks and best practices.</p>
-                    <div class="service-tools">React &bull; Node.js &bull; Next.js</div>
-                </div>
-                <div class="service-card glass-card" data-reveal>
-                    <div class="service-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    </div>
-                    <h3>Full Stack Solutions</h3>
-                    <p>End-to-end development from database design to frontend interfaces. Complete solutions that scale with your business.</p>
-                    <div class="service-tools">MongoDB &bull; Express &bull; APIs</div>
-                </div>
-                <div class="service-card glass-card" data-reveal>
-                    <div class="service-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-                    </div>
-                    <h3>Mobile Development</h3>
-                    <p>Cross-platform mobile apps with Flutter that deliver native-like performance on both iOS and Android.</p>
-                    <div class="service-tools">Flutter &bull; Dart &bull; Firebase</div>
-                </div>
-                <div class="service-card glass-card" data-reveal>
-                    <div class="service-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
-                    </div>
-                    <h3>SEO & Optimization</h3>
-                    <p>Search engine optimization and performance tuning to ensure your site ranks high and loads blazingly fast.</p>
-                    <div class="service-tools">Core Web Vitals &bull; Analytics</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== PROJECTS SECTION ===== -->
-    <section class="projects" id="projects">
-        <div class="section-container">
-            <div class="section-header" data-reveal>
-                <span class="section-tag">My Work</span>
-                <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
-                <p class="section-subtitle">A selection of my recent work across web, mobile, and AI</p>
-            </div>
-            <div class="projects-filter" data-reveal>
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="web">Web</button>
-                <button class="filter-btn" data-filter="mobile">Mobile</button>
-                <button class="filter-btn" data-filter="ai">AI / ML</button>
-            </div>
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card" data-category="web" data-reveal>
-                    <div class="project-image">
-                        <div class="project-placeholder" style="--accent: #6c63ff;">
-                            <span class="project-emoji">📚</span>
-                        </div>
-                        <div class="project-overlay">
-                            <a href="https://github.com/workmail1803-ai/ORO-BookStore" target="_blank" class="project-link" aria-label="View source">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                            </a>
-                            <a href="https://github.com/23101119/ORO-BookStore" target="_blank" class="project-link" aria-label="Live demo">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>ORO BookStore</h3>
-                        <p>A full-featured online bookstore with search, cart, and checkout functionality.</p>
-                        <div class="project-tags">
-                            <span>HTML/CSS</span>
-                            <span>JavaScript</span>
-                            <span>E-Commerce</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="project-card" data-category="ai" data-reveal>
-                    <div class="project-image">
-                        <div class="project-placeholder" style="--accent: #ff6b6b;">
-                            <span class="project-emoji">🤖</span>
-                        </div>
-                        <div class="project-overlay">
-                            <a href="https://github.com/workmail1803-ai/active_dream_bot" target="_blank" class="project-link" aria-label="View source">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Active Dream Bot</h3>
-                        <p>An intelligent AI-powered bot for automated tasks and conversational interactions.</p>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>AI</span>
-                            <span>Bot</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 3 -->
-                <div class="project-card" data-category="mobile" data-reveal>
-                    <div class="project-image">
-                        <div class="project-placeholder" style="--accent: #4ecdc4;">
-                            <span class="project-emoji">📱</span>
-                        </div>
-                        <div class="project-overlay">
-                            <a href="https://github.com/workmail1803-ai/Flutter_Project" target="_blank" class="project-link" aria-label="View source">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Flutter Project</h3>
-                        <p>Cross-platform mobile application built with Flutter for seamless iOS and Android experience.</p>
-                        <div class="project-tags">
-                            <span>Flutter</span>
-                            <span>Dart</span>
-                            <span>Mobile</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 4 -->
-                <div class="project-card" data-category="ai" data-reveal>
-                    <div class="project-image">
-                        <div class="project-placeholder" style="--accent: #ffd93d;">
-                            <span class="project-emoji">🧠</span>
-                        </div>
-                        <div class="project-overlay">
-                            <a href="https://github.com/workmail1803-ai/ML_Project" target="_blank" class="project-link" aria-label="View source">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>ML Project</h3>
-                        <p>Machine learning project featuring data analysis, model training, and prediction capabilities.</p>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>ML</span>
-                            <span>Data Science</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 5 -->
-                <div class="project-card" data-category="web" data-reveal>
-                    <div class="project-image">
-                        <div class="project-placeholder" style="--accent: #a29bfe;">
-                            <span class="project-emoji">🏥</span>
-                        </div>
-                        <div class="project-overlay">
-                            <a href="https://github.com/workmail1803-ai/Doctors_RX" target="_blank" class="project-link" aria-label="View source">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Doctors RX</h3>
-                        <p>A healthcare prescription management system for doctors and patients.</p>
-                        <div class="project-tags">
-                            <span>Web App</span>
-                            <span>Healthcare</span>
-                            <span>Full Stack</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 6 -->
-                <div class="project-card" data-category="web" data-reveal>
-                    <div class="project-image">
-                        <div class="project-placeholder" style="--accent: #00b894;">
-                            <span class="project-emoji">🆘</span>
-                        </div>
-                        <div class="project-overlay">
-                            <a href="https://github.com/workmail1803-ai/Relief-Chain-" target="_blank" class="project-link" aria-label="View source">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Relief Chain</h3>
-                        <p>Disaster relief coordination platform connecting donors with communities in need.</p>
-                        <div class="project-tags">
-                            <span>Web App</span>
-                            <span>Social Impact</span>
-                            <span>Full Stack</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="projects-cta" data-reveal>
-                <a href="https://github.com/workmail1803-ai" target="_blank" class="btn btn-outline">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                    <span>View All on GitHub</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== CONTACT SECTION ===== -->
-    <section class="contact" id="contact">
-        <div class="section-container">
-            <div class="section-header" data-reveal>
-                <span class="section-tag">Get In Touch</span>
-                <h2 class="section-title">Let's Work <span class="gradient-text">Together</span></h2>
-                <p class="section-subtitle">Have a project in mind? Let's bring your vision to life</p>
-            </div>
-            <div class="contact-grid">
-                <form class="contact-form glass-card" id="contactForm" data-reveal>
-                    <div class="form-group">
-                        <input type="text" id="formName" name="name" required placeholder=" ">
-                        <label for="formName">Your Name</label>
-                        <div class="form-line"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="formEmail" name="email" required placeholder=" ">
-                        <label for="formEmail">Your Email</label>
-                        <div class="form-line"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="formSubject" name="subject" placeholder=" ">
-                        <label for="formSubject">Subject</label>
-                        <div class="form-line"></div>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="formMessage" name="message" rows="4" required placeholder=" "></textarea>
-                        <label for="formMessage">Your Message</label>
-                        <div class="form-line"></div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
-                        <span class="btn-text">Send Message</span>
-                        <span class="btn-loading">
-                            <svg class="spinner" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"/></svg>
-                            Sending...
-                        </span>
-                        <span class="btn-success">✓ Sent!</span>
-                    </button>
-                </form>
-                <div class="contact-info" data-reveal>
-                    <div class="info-card glass-card">
-                        <div class="info-icon">📧</div>
-                        <div class="info-content">
-                            <h4>Email</h4>
-                            <a href="mailto:workmail1803.ai@gmail.com">workmail1803.ai@gmail.com</a>
-                        </div>
-                    </div>
-                    <div class="info-card glass-card">
-                        <div class="info-icon">📍</div>
-                        <div class="info-content">
-                            <h4>Location</h4>
-                            <span>Dhaka, Bangladesh</span>
-                        </div>
-                    </div>
-                    <div class="info-card glass-card">
-                        <div class="info-icon">🎓</div>
-                        <div class="info-content">
-                            <h4>University</h4>
-                            <span>BRAC University | CSE</span>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://github.com/workmail1803-ai" target="_blank" class="social-link" aria-label="GitHub">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        </a>
-                        <a href="https://linkedin.com/in/nafis-hossain-momen" target="_blank" class="social-link" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </a>
-                        <a href="https://wa.me/8801XXXXXXXXX" target="_blank" class="social-link" aria-label="WhatsApp">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- ===== PAGE CONTAINER ===== -->
+    <main class="page-container" id="pageContainer">
+        <!-- Pages rendered here by JS -->
+    </main>
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <div class="footer-container">
+        <div class="footer-inner">
+            <div class="footer-rule"></div>
             <div class="footer-content">
-                <a href="#hero" class="footer-logo">
-                    <span class="logo-bracket">&lt;</span>NHM<span class="logo-bracket">/&gt;</span>
-                </a>
-                <p>&copy; 2026 Nafis Hossain Momen. All rights reserved.</p>
+                <span>&copy; 2026 Nafis Hossain Momen</span>
+                <span class="footer-dot">&bull;</span>
+                <span>BRAC University</span>
+                <span class="footer-dot">&bull;</span>
+                <span>Dhaka, Bangladesh</span>
             </div>
-            <button class="back-to-top" id="backToTop" aria-label="Back to top">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
-            </button>
+            <p class="footer-note">This portfolio fetches live data from GitHub. All projects are open-source.</p>
         </div>
     </footer>
 
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
