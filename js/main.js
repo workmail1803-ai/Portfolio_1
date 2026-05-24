@@ -1,4 +1,4 @@
-﻿/* =====================================================
+/* =====================================================
    VINTAGE WIKI PORTFOLIO â€” JavaScript
    Router, GitHub API, Markdown Rendering
    ===================================================== */
@@ -632,20 +632,16 @@ async function callClientAPI(messages, apiKey) {
   return data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response generated.';
 }
 
-// â”€â”€ Check if serverless endpoint is available â”€â”€
+// ── Check if serverless endpoint is available ──
 async function checkServerMode() {
   if (serverMode !== null) return serverMode;
   try {
-    // Quick check â€” if we're on file:// it won't work
     if (window.location.protocol === 'file:') {
       serverMode = false;
       return false;
     }
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: [{ role: 'user', content: 'test' }], systemPrompt: 'Reply with OK' })
-    });
+    // Simple GET health check — doesn't burn any AI API quota
+    const res = await fetch('/api/chat', { method: 'GET' });
     serverMode = res.ok;
     return serverMode;
   } catch {
