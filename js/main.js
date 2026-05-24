@@ -6,6 +6,56 @@
 const GITHUB_USER = 'workmail1803-ai';
 const OWNER_NAME  = 'Nafis Hossain Momen';
 
+// ── Curated Project Descriptions ──
+// Researched from README files and repository file structures
+const PROJECT_DESCRIPTIONS = {
+  'active_dream_bot': 'A permission-based private Telegram bot for virtual phone numbers and automated OTP verification. Fully modular, production-ready bot built with Python 3.11+ and the Telegram Bot API.',
+  'Flutter_Project': 'Wondr NEUB — A Flutter mobile application for university services. Cross-platform mobile app built with Dart, targeting both Android and iOS platforms.',
+  'ML_Project': 'Malware Analysis using Machine Learning — A data science project that performs malware classification and threat detection using CSV datasets, threshold analysis, and Jupyter Notebook-based model training.',
+  'Nextup': 'A travel and tour booking platform built with Next.js, TypeScript, and Supabase. Features destination browsing, package listings, admin dashboard, FAQ pages in Bengali/English, and SEO optimization.',
+  'Fahim_Vai': 'A professional business website built with Next.js and TypeScript. Clean, modern single-page design with responsive layout and optimized performance.',
+  'prescription': 'A doctor prescription management tool with medicine database, prescription writing interface, visit tracking, and print-ready prescription templates. Built with vanilla HTML, CSS, and JavaScript.',
+  'Relief-Chain-': 'Relief Chain — A disaster relief coordination platform built with React, Vite, and Supabase. Features community posts, medical module, shop module, and real-time relief supply chain management.',
+  'Doctors_RX': 'Rx Portal — A modern doctor prescription management system built with React, TypeScript, Vite, Supabase, and Tailwind CSS. Features patient dashboard, medicine autosuggest, print studio with mobile-friendly A4 preview.',
+  'ARAB': 'A full-stack delivery and logistics management system built with Next.js and TypeScript. Features agent dashboard, rider management, order tracking, WooCommerce integration, and real-time delivery status.',
+  'Redwan': 'Sweet Delights BD — A premium cake shop website for Bangladesh built with Next.js 14. Features PWA support, Bengali language, scroll animations, WhatsApp ordering integration, and mobile-first responsive design.',
+  'NUB_PAGE': 'A university web portal built with React, TypeScript, and Vite. Modern single-page application with component-based architecture and responsive design for university information.',
+  'MIM_Project': "Wond'r NEUB — A Django-based study tour booking system for NEUB students. Full-stack Python web application with booking management, student registration, and tour package features.",
+  'Assignment_1_B13_Proggraming_Hero.': 'Programming Hero Batch 13 — Assignment 1. A front-end web development assignment showcasing HTML structuring and foundational web design concepts.',
+  'Assignment_2_B13_Proggraming_Hero.': 'Programming Hero Batch 13 — Assignment 2. A CSS-focused web development assignment demonstrating responsive layouts, styling techniques, and modern CSS patterns.',
+  'Mahin_Buiseness': 'A business studies lecture booklet and interactive slide presentation. Features LaTeX-generated PDF booklet with content extraction tools and an HTML-based slide viewer for students.',
+  'portfolio': 'An earlier iteration of a personal developer portfolio. Single-page HTML portfolio with resume PDF, showcasing projects and professional background.',
+  'Portfolio_1': 'This portfolio website — a vintage wiki-themed developer portfolio that dynamically fetches projects from GitHub and renders README files as case study pages.'
+};
+
+const PROJECT_CATEGORIES = {
+  'active_dream_bot': 'bot',
+  'Flutter_Project': 'mobile',
+  'ML_Project': 'ai',
+  'Nextup': 'web',
+  'Fahim_Vai': 'web',
+  'prescription': 'web',
+  'Relief-Chain-': 'web',
+  'Doctors_RX': 'web',
+  'ARAB': 'web',
+  'Redwan': 'web',
+  'NUB_PAGE': 'web',
+  'MIM_Project': 'web',
+  'Assignment_1_B13_Proggraming_Hero.': 'academic',
+  'Assignment_2_B13_Proggraming_Hero.': 'academic',
+  'Mahin_Buiseness': 'academic',
+  'portfolio': 'web',
+  'Portfolio_1': 'web'
+};
+
+function getDescription(repo) {
+  return PROJECT_DESCRIPTIONS[repo.name] || repo.description || 'No description available.';
+}
+
+function getCategory(repo) {
+  return PROJECT_CATEGORIES[repo.name] || 'other';
+}
+
 // Cache
 let reposCache = null;
 let readmeCache = {};
@@ -193,7 +243,7 @@ async function renderHome() {
         ${recent.map(r => `
           <a href="#/project/${r.name}" class="project-list-item">
             <span class="project-list-name">${formatRepoName(r.name)}</span>
-            <span class="project-list-desc">${r.description || 'No description'}</span>
+            <span class="project-list-desc">${getDescription(r)}</span>
             <span class="project-list-arrow">&rarr;</span>
           </a>
         `).join('')}
@@ -257,7 +307,7 @@ function renderProjectCard(repo, index) {
       <div class="project-index">${String(index + 1).padStart(2, '0')}</div>
       <div class="project-card-body">
         <h3>${formatRepoName(repo.name)}</h3>
-        <p>${repo.description || 'No description available.'}</p>
+        <p>${getDescription(repo)}</p>
         <div class="project-card-meta">
           ${repo.language ? `<span><span class="lang-dot" style="background:${langColor(repo.language)}"></span>${repo.language}</span>` : ''}
           ${repo.stargazers_count ? `<span>&#9733; ${repo.stargazers_count}</span>` : ''}
@@ -294,7 +344,7 @@ async function renderProjectDetail(repoName) {
 
       <div class="detail-header">
         <h1 class="detail-title">${formatRepoName(repo.name)}</h1>
-        ${repo.description ? `<p style="color:var(--ink-light);font-size:0.88rem;margin-bottom:16px;">${repo.description}</p>` : ''}
+        <p style="color:var(--ink-light);font-size:0.88rem;margin-bottom:16px;">${getDescription(repo)}</p>
         <div class="detail-meta-bar">
           ${repo.language ? `<span class="detail-meta-item"><strong>Language:</strong> ${repo.language}</span>` : ''}
           <span class="detail-meta-item"><strong>Created:</strong> ${fmtDate(repo.created_at)}</span>
