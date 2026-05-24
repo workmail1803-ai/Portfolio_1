@@ -1,31 +1,31 @@
-/* =====================================================
-   VINTAGE WIKI PORTFOLIO — JavaScript
+﻿/* =====================================================
+   VINTAGE WIKI PORTFOLIO â€” JavaScript
    Router, GitHub API, Markdown Rendering
    ===================================================== */
 
 const GITHUB_USER = 'workmail1803-ai';
 const OWNER_NAME  = 'Nafis Hossain Momen';
 
-// ── Curated Project Descriptions ──
+// â”€â”€ Curated Project Descriptions â”€â”€
 // Researched from README files and repository file structures
 const PROJECT_DESCRIPTIONS = {
   'active_dream_bot': 'A permission-based private Telegram bot for virtual phone numbers and automated OTP verification. Fully modular, production-ready bot built with Python 3.11+ and the Telegram Bot API.',
-  'Flutter_Project': 'Wondr NEUB — A Flutter mobile application for university services. Cross-platform mobile app built with Dart, targeting both Android and iOS platforms.',
-  'ML_Project': 'Malware Analysis using Machine Learning — A data science project that performs malware classification and threat detection using CSV datasets, threshold analysis, and Jupyter Notebook-based model training.',
+  'Flutter_Project': 'Wondr NEUB â€” A Flutter mobile application for university services. Cross-platform mobile app built with Dart, targeting both Android and iOS platforms.',
+  'ML_Project': 'Malware Analysis using Machine Learning â€” A data science project that performs malware classification and threat detection using CSV datasets, threshold analysis, and Jupyter Notebook-based model training.',
   'Nextup': 'A travel and tour booking platform built with Next.js, TypeScript, and Supabase. Features destination browsing, package listings, admin dashboard, FAQ pages in Bengali/English, and SEO optimization.',
   'Fahim_Vai': 'A professional business website built with Next.js and TypeScript. Clean, modern single-page design with responsive layout and optimized performance.',
   'prescription': 'A doctor prescription management tool with medicine database, prescription writing interface, visit tracking, and print-ready prescription templates. Built with vanilla HTML, CSS, and JavaScript.',
-  'Relief-Chain-': 'Relief Chain — A disaster relief coordination platform built with React, Vite, and Supabase. Features community posts, medical module, shop module, and real-time relief supply chain management.',
-  'Doctors_RX': 'Rx Portal — A modern doctor prescription management system built with React, TypeScript, Vite, Supabase, and Tailwind CSS. Features patient dashboard, medicine autosuggest, print studio with mobile-friendly A4 preview.',
+  'Relief-Chain-': 'Relief Chain â€” A disaster relief coordination platform built with React, Vite, and Supabase. Features community posts, medical module, shop module, and real-time relief supply chain management.',
+  'Doctors_RX': 'Rx Portal â€” A modern doctor prescription management system built with React, TypeScript, Vite, Supabase, and Tailwind CSS. Features patient dashboard, medicine autosuggest, print studio with mobile-friendly A4 preview.',
   'ARAB': 'A full-stack delivery and logistics management system built with Next.js and TypeScript. Features agent dashboard, rider management, order tracking, WooCommerce integration, and real-time delivery status.',
-  'Redwan': 'Sweet Delights BD — A premium cake shop website for Bangladesh built with Next.js 14. Features PWA support, Bengali language, scroll animations, WhatsApp ordering integration, and mobile-first responsive design.',
+  'Redwan': 'Sweet Delights BD â€” A premium cake shop website for Bangladesh built with Next.js 14. Features PWA support, Bengali language, scroll animations, WhatsApp ordering integration, and mobile-first responsive design.',
   'NUB_PAGE': 'A university web portal built with React, TypeScript, and Vite. Modern single-page application with component-based architecture and responsive design for university information.',
-  'MIM_Project': "Wond'r NEUB — A Django-based study tour booking system for NEUB students. Full-stack Python web application with booking management, student registration, and tour package features.",
-  'Assignment_1_B13_Proggraming_Hero.': 'Programming Hero Batch 13 — Assignment 1. A front-end web development assignment showcasing HTML structuring and foundational web design concepts.',
-  'Assignment_2_B13_Proggraming_Hero.': 'Programming Hero Batch 13 — Assignment 2. A CSS-focused web development assignment demonstrating responsive layouts, styling techniques, and modern CSS patterns.',
+  'MIM_Project': "Wond'r NEUB â€” A Django-based study tour booking system for NEUB students. Full-stack Python web application with booking management, student registration, and tour package features.",
+  'Assignment_1_B13_Proggraming_Hero.': 'Programming Hero Batch 13 â€” Assignment 1. A front-end web development assignment showcasing HTML structuring and foundational web design concepts.',
+  'Assignment_2_B13_Proggraming_Hero.': 'Programming Hero Batch 13 â€” Assignment 2. A CSS-focused web development assignment demonstrating responsive layouts, styling techniques, and modern CSS patterns.',
   'Mahin_Buiseness': 'A business studies lecture booklet and interactive slide presentation. Features LaTeX-generated PDF booklet with content extraction tools and an HTML-based slide viewer for students.',
   'portfolio': 'An earlier iteration of a personal developer portfolio. Single-page HTML portfolio with resume PDF, showcasing projects and professional background.',
-  'Portfolio_1': 'This portfolio website — a vintage wiki-themed developer portfolio that dynamically fetches projects from GitHub and renders README files as case study pages.'
+  'Portfolio_1': 'This portfolio website â€” a vintage wiki-themed developer portfolio that dynamically fetches projects from GitHub and renders README files as case study pages.'
 };
 
 const PROJECT_CATEGORIES = {
@@ -60,7 +60,7 @@ function getCategory(repo) {
 let reposCache = null;
 let readmeCache = {};
 
-// ── Static Fallback Data ──
+// â”€â”€ Static Fallback Data â”€â”€
 // Embedded snapshot so the site works when API is rate-limited or opened from file://
 const REPOS_FALLBACK = [
   { name: 'Portfolio_1', language: 'CSS', description: '', html_url: 'https://github.com/workmail1803-ai/Portfolio_1', homepage: '', created_at: '2026-05-24T00:00:00Z', updated_at: '2026-05-24T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 50, fork: false },
@@ -82,7 +82,7 @@ const REPOS_FALLBACK = [
   { name: 'prescription', language: 'JavaScript', description: '', html_url: 'https://github.com/workmail1803-ai/prescription', homepage: '', created_at: '2025-04-01T00:00:00Z', updated_at: '2026-02-15T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 80, fork: false }
 ];
 
-// ── GitHub API ──
+// â”€â”€ GitHub API â”€â”€
 async function fetchRepos() {
   if (reposCache) return reposCache;
   try {
@@ -90,7 +90,7 @@ async function fetchRepos() {
     if (!res.ok) throw new Error(`GitHub API returned ${res.status}`);
     const repos = await res.json();
     reposCache = repos.filter(r => !r.fork);
-    console.log(`✓ Loaded ${reposCache.length} repos from GitHub API`);
+    console.log(`âœ“ Loaded ${reposCache.length} repos from GitHub API`);
     return reposCache;
   } catch (err) {
     console.warn('GitHub API unavailable, using cached data:', err.message);
@@ -115,7 +115,7 @@ async function fetchReadme(repoName) {
   }
 }
 
-// ── Language Colors ──
+// â”€â”€ Language Colors â”€â”€
 const LANG_COLORS = {
   'JavaScript': '#f1e05a',
   'TypeScript': '#3178c6',
@@ -140,7 +140,7 @@ function langColor(lang) {
   return LANG_COLORS[lang] || '#8b8b8b';
 }
 
-// ── Router ──
+// â”€â”€ Router â”€â”€
 const container = document.getElementById('pageContainer');
 
 function getRoute() {
@@ -185,7 +185,7 @@ async function navigate() {
   }
 }
 
-// ── Loading ──
+// â”€â”€ Loading â”€â”€
 function showLoading(message = 'Fetching data') {
   container.innerHTML = `
     <div class="loading-state page-enter">
@@ -195,14 +195,14 @@ function showLoading(message = 'Fetching data') {
   `;
 }
 
-// ── Format Date ──
+// â”€â”€ Format Date â”€â”€
 function fmtDate(dateStr) {
-  if (!dateStr) return '—';
+  if (!dateStr) return 'â€”';
   const d = new Date(dateStr);
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-// ── HOME PAGE ──
+// â”€â”€ HOME PAGE â”€â”€
 async function renderHome() {
   showLoading('Loading portfolio');
   const repos = await fetchRepos();
@@ -285,7 +285,7 @@ async function renderHome() {
   `;
 }
 
-// ── PROJECTS PAGE ──
+// â”€â”€ PROJECTS PAGE â”€â”€
 async function renderProjects() {
   showLoading('Fetching repositories');
   const repos = await fetchRepos();
@@ -346,7 +346,7 @@ function renderProjectCard(repo, index) {
   `;
 }
 
-// ── PROJECT DETAIL PAGE ──
+// â”€â”€ PROJECT DETAIL PAGE â”€â”€
 async function renderProjectDetail(repoName) {
   showLoading('Loading project');
 
@@ -402,7 +402,7 @@ async function renderProjectDetail(repoName) {
   `;
 }
 
-// ── CONTACT PAGE ──
+// â”€â”€ CONTACT PAGE â”€â”€
 function renderContact() {
   container.innerHTML = `
     <div class="page-enter">
@@ -485,7 +485,7 @@ function renderContact() {
     btn.textContent = 'SENDING...';
     btn.disabled = true;
     setTimeout(() => {
-      btn.textContent = '✓ MESSAGE SENT';
+      btn.textContent = 'âœ“ MESSAGE SENT';
       btn.style.background = '#2d6a2d';
       btn.style.borderColor = '#2d6a2d';
       setTimeout(() => {
@@ -503,68 +503,7 @@ function renderContact() {
 //  AI ASSISTANT
 // =====================================================
 
-const AI_PROVIDERS = {
-  gemini: {
-    name: 'Gemini',
-    label: 'Google Gemini (Free)',
-    keyHint: 'Get free key → <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a>',
-    storageKey: 'portfolio_gemini_key',
-    async call(apiKey, messages) {
-      const contents = messages.map(m => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }]
-      }));
-      const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-            contents,
-            generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
-          })
-        }
-      );
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.error?.message || `Gemini API error ${res.status}`);
-      }
-      const data = await res.json();
-      return data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response generated.';
-    }
-  },
-  groq: {
-    name: 'Groq',
-    label: 'Groq / Llama (Free)',
-    keyHint: 'Get free key → <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a>',
-    storageKey: 'portfolio_groq_key',
-    async call(apiKey, messages) {
-      const body = {
-        model: 'llama-3.3-70b-versatile',
-        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
-        temperature: 0.7,
-        max_tokens: 1024
-      };
-      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify(body)
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.error?.message || `Groq API error ${res.status}`);
-      }
-      const data = await res.json();
-      return data.choices?.[0]?.message?.content || 'No response generated.';
-    }
-  }
-};
-
-// ── System Prompt (Knowledge Base) ──
+// â”€â”€ System Prompt (Knowledge Base) â”€â”€
 const SYSTEM_PROMPT = `You are the AI assistant for Nafis Hossain Momen's developer portfolio. You help potential clients and visitors understand Nafis's capabilities, experience, and project portfolio.
 
 ABOUT NAFIS:
@@ -573,7 +512,7 @@ ABOUT NAFIS:
 - Education: BRAC University (Final Semester), CSE Department, Dhaka, Bangladesh
 - Contact: workmail1803.ai@gmail.com | +880 1756-003283 (WhatsApp)
 - GitHub: github.com/workmail1803-ai
-- Specialization: AI-assisted development — every line of code is precisely debugged and optimized
+- Specialization: AI-assisted development â€” every line of code is precisely debugged and optimized
 
 TECHNICAL SKILLS:
 - Frontend: HTML, CSS, JavaScript, React, Next.js, TypeScript, Tailwind CSS
@@ -583,51 +522,51 @@ TECHNICAL SKILLS:
 - Automation: Telegram Bot API, Python scripting
 - Tools: Git, Vite, LaTeX
 
-PROJECT PORTFOLIO — Use these as evidence when answering client questions:
+PROJECT PORTFOLIO â€” Use these as evidence when answering client questions:
 
-1. Doctors_RX [TypeScript/React] → https://github.com/workmail1803-ai/Doctors_RX
+1. Doctors_RX [TypeScript/React] â†’ https://github.com/workmail1803-ai/Doctors_RX
    Rx Portal: Modern prescription management system for doctors. React + TypeScript + Vite + Supabase + Tailwind CSS. Features: patient dashboard, medicine autosuggest (local & database), dynamic prescription fields, mobile-friendly print studio with auto-scaling A4 layout.
 
-2. active_dream_bot [Python] → https://github.com/workmail1803-ai/active_dream_bot
+2. active_dream_bot [Python] â†’ https://github.com/workmail1803-ai/active_dream_bot
    Permission-based private Telegram bot for virtual phone numbers and automated OTP verification. Fully modular, production-ready. Python 3.11+ with Telegram Bot API.
 
-3. Relief-Chain- [JavaScript/React] → https://github.com/workmail1803-ai/Relief-Chain-
+3. Relief-Chain- [JavaScript/React] â†’ https://github.com/workmail1803-ai/Relief-Chain-
    Disaster relief coordination platform. React + Vite + Supabase. Features: community posts, medical module, shop module, SQL schema for supply chain, real-time coordination.
 
-4. ARAB [TypeScript/Next.js] → https://github.com/workmail1803-ai/ARAB
+4. ARAB [TypeScript/Next.js] â†’ https://github.com/workmail1803-ai/ARAB
    Full-stack delivery and logistics management system. Features: agent dashboard, rider management, order tracking, WooCommerce integration, real-time delivery status.
 
-5. Redwan [TypeScript/Next.js] → https://github.com/workmail1803-ai/Redwan
+5. Redwan [TypeScript/Next.js] â†’ https://github.com/workmail1803-ai/Redwan
    Sweet Delights BD: Premium cake shop website for Bangladesh. Next.js 14 + PWA support + Bengali language + scroll animations + WhatsApp ordering + mobile-first design.
 
-6. Nextup [TypeScript/Next.js] → https://github.com/workmail1803-ai/Nextup
+6. Nextup [TypeScript/Next.js] â†’ https://github.com/workmail1803-ai/Nextup
    Travel and tour booking platform. Next.js + TypeScript + Supabase. Features: destination browsing, package listings, admin dashboard, multilingual FAQ (Bengali/English), full SEO.
 
-7. Flutter_Project [Dart] → https://github.com/workmail1803-ai/Flutter_Project
+7. Flutter_Project [Dart] â†’ https://github.com/workmail1803-ai/Flutter_Project
    Wondr NEUB: Flutter mobile app for university services. Cross-platform (Android + iOS).
 
-8. ML_Project [Python/Jupyter] → https://github.com/workmail1803-ai/ML_Project
+8. ML_Project [Python/Jupyter] â†’ https://github.com/workmail1803-ai/ML_Project
    Malware Analysis using Machine Learning. Malware classification and threat detection with CSV datasets, threshold analysis, model training via Jupyter Notebooks.
 
-9. MIM_Project [Python/Django] → https://github.com/workmail1803-ai/MIM_Project
+9. MIM_Project [Python/Django] â†’ https://github.com/workmail1803-ai/MIM_Project
    Wond'r NEUB: Django-based study tour booking system. Full-stack Python web app with booking management, student registration, tour packages.
 
-10. NUB_PAGE [TypeScript/React] → https://github.com/workmail1803-ai/NUB_PAGE
+10. NUB_PAGE [TypeScript/React] â†’ https://github.com/workmail1803-ai/NUB_PAGE
     University web portal. React + TypeScript + Vite. Modern SPA with component-based architecture.
 
-11. prescription [JavaScript] → https://github.com/workmail1803-ai/prescription
+11. prescription [JavaScript] â†’ https://github.com/workmail1803-ai/prescription
     Doctor prescription tool with medicine database, prescription writing, visit tracking, print-ready templates. Vanilla HTML/CSS/JS.
 
-12. Fahim_Vai [TypeScript/Next.js] → https://github.com/workmail1803-ai/Fahim_Vai
+12. Fahim_Vai [TypeScript/Next.js] â†’ https://github.com/workmail1803-ai/Fahim_Vai
     Professional business website. Next.js + TypeScript. Clean modern single-page design.
 
-13. Mahin_Buiseness [HTML/LaTeX] → https://github.com/workmail1803-ai/Mahin_Buiseness
+13. Mahin_Buiseness [HTML/LaTeX] â†’ https://github.com/workmail1803-ai/Mahin_Buiseness
     Business studies lecture booklet and slide presentation. LaTeX-generated PDF with HTML viewer.
 
-14. Portfolio_1 [HTML/CSS/JS] → https://github.com/workmail1803-ai/Portfolio_1
+14. Portfolio_1 [HTML/CSS/JS] â†’ https://github.com/workmail1803-ai/Portfolio_1
     This portfolio website. Vintage wiki-themed, dynamically fetches GitHub data, renders READMEs as case studies.
 
-INSTRUCTIONS — Follow these strictly:
+INSTRUCTIONS â€” Follow these strictly:
 1. Always refer to Nafis in THIRD PERSON: "Nafis has built...", "Nafis can help with...", "Nafis specializes in..."
 2. When a client describes a need, match it with the MOST RELEVANT projects above and provide the GitHub URL as proof.
 3. Be professional, confident, and enthusiastic about Nafis's capabilities.
@@ -638,42 +577,96 @@ INSTRUCTIONS — Follow these strictly:
 8. Highlight Nafis's unique strength: AI-assisted development ensuring precise, thoroughly debugged code.
 9. Format responses with markdown: use **bold** for emphasis, bullet points for lists, and [links](url) for repos.`;
 
-// ── Chat State ──
+// â”€â”€ Chat State â”€â”€
 let chatHistory = [];
+let serverMode = null; // null = not checked, true = serverless available, false = fallback to client-side
 let currentProvider = 'gemini';
 
-function getApiKey(provider) {
-  try { return localStorage.getItem(AI_PROVIDERS[provider].storageKey) || ''; }
+function getApiKey() {
+  try { return localStorage.getItem('portfolio_ai_key') || ''; }
   catch { return ''; }
 }
-function setApiKey(provider, key) {
-  try { localStorage.setItem(AI_PROVIDERS[provider].storageKey, key); }
+function setApiKey(key) {
+  try { localStorage.setItem('portfolio_ai_key', key); }
   catch {}
 }
 
-// ── Render Assistant Page ──
+// â”€â”€ API Call: Server-side (Vercel) â”€â”€
+async function callServerAPI(messages) {
+  const res = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages, systemPrompt: SYSTEM_PROMPT })
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || `Server error ${res.status}`);
+  }
+  const data = await res.json();
+  return data.reply;
+}
+
+// â”€â”€ API Call: Client-side (Direct Gemini) â”€â”€
+async function callClientAPI(messages, apiKey) {
+  const contents = messages.map(m => ({
+    role: m.role === 'assistant' ? 'model' : 'user',
+    parts: [{ text: m.content }]
+  }));
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+        contents,
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+      })
+    }
+  );
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error?.message || `API error ${res.status}`);
+  }
+  const data = await res.json();
+  return data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response generated.';
+}
+
+// â”€â”€ Check if serverless endpoint is available â”€â”€
+async function checkServerMode() {
+  if (serverMode !== null) return serverMode;
+  try {
+    // Quick check â€” if we're on file:// it won't work
+    if (window.location.protocol === 'file:') {
+      serverMode = false;
+      return false;
+    }
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: [{ role: 'user', content: 'test' }], systemPrompt: 'Reply with OK' })
+    });
+    serverMode = res.ok;
+    return serverMode;
+  } catch {
+    serverMode = false;
+    return false;
+  }
+}
+
+// â”€â”€ Render Assistant Page â”€â”€
 function renderAssistant() {
-  const provider = AI_PROVIDERS[currentProvider];
-  const hasKey = !!getApiKey(currentProvider);
+  const hasKey = !!getApiKey();
 
   container.innerHTML = `
     <div class="page-enter">
       <div class="chat-header">
         <h1>Ask Nafis's AI</h1>
-        <p>AI assistant trained on Nafis's complete project portfolio. Ask about skills, experience, or describe your project needs — the AI will match them with real work and GitHub repos.</p>
+        <p>AI assistant trained on Nafis's complete project portfolio. Ask about skills, experience, or describe your project needs â€” the AI will match them with real work Nafis has done.</p>
       </div>
 
-      <!-- Provider Tabs -->
-      <div class="provider-tabs" id="providerTabs">
-        ${Object.entries(AI_PROVIDERS).map(([key, p]) => `
-          <button class="provider-tab ${key === currentProvider ? 'active' : ''}" data-provider="${key}">${p.label}</button>
-        `).join('')}
-      </div>
-
-      <!-- API Key Setup / Status -->
-      <div id="apiSection">
-        ${hasKey ? renderApiStatus() : renderApiSetup()}
-      </div>
+      <!-- API Key Section (only shows in fallback mode) -->
+      <div id="apiSection"></div>
 
       <!-- Chat Window -->
       <div class="chat-window">
@@ -681,8 +674,8 @@ function renderAssistant() {
           ${chatHistory.length === 0 ? renderWelcome() : chatHistory.map(m => renderMessage(m.role, m.content)).join('')}
         </div>
         <div class="chat-input-bar">
-          <input type="text" class="chat-input" id="chatInput" placeholder="Ask about Nafis's skills, projects, or describe your needs..." ${!hasKey ? 'disabled' : ''}>
-          <button class="chat-send" id="chatSend" ${!hasKey ? 'disabled' : ''}>Send</button>
+          <input type="text" class="chat-input" id="chatInput" placeholder="Ask about Nafis's skills, projects, or describe your needs...">
+          <button class="chat-send" id="chatSend">Send</button>
         </div>
       </div>
 
@@ -698,36 +691,68 @@ function renderAssistant() {
     </div>
   `;
 
+  // Check server mode and show fallback UI if needed
+  initAssistant();
+}
+
+async function initAssistant() {
+  const isServer = await checkServerMode();
+  const apiSection = document.getElementById('apiSection');
+
+  if (isServer) {
+    // Server mode â€” no key needed, just show connected status
+    apiSection.innerHTML = `
+      <div class="api-status">
+        <span class="api-status-dot connected"></span>
+        <span>AI ASSISTANT â€” ONLINE &bull; Powered by Gemini</span>
+      </div>
+    `;
+  } else {
+    // Fallback mode â€” need API key
+    const hasKey = !!getApiKey();
+    if (hasKey) {
+      const key = getApiKey();
+      const masked = key.substring(0, 6) + 'â€¢'.repeat(12) + key.slice(-4);
+      apiSection.innerHTML = `
+        <div class="api-status">
+          <span class="api-status-dot connected"></span>
+          <span>Connected via your API key â€” ${masked}</span>
+          <button class="api-status-change" id="apiChangeBtn">Change Key</button>
+        </div>
+      `;
+      document.getElementById('apiChangeBtn')?.addEventListener('click', () => {
+        try { localStorage.removeItem('portfolio_ai_key'); } catch {}
+        renderAssistant();
+      });
+    } else {
+      apiSection.innerHTML = `
+        <div class="api-setup">
+          <div class="api-setup-title">Connect Gemini API</div>
+          <p>The AI server is not available. To use the assistant, enter your free Gemini API key. Your key is stored locally in your browser only.</p>
+          <div class="api-setup-row">
+            <input type="password" class="api-key-input" id="apiKeyInput" placeholder="Paste your Gemini API key here...">
+            <button class="api-key-btn" id="apiKeyBtn">Connect</button>
+          </div>
+          <p class="api-setup-hint">Get free key â†’ <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></p>
+        </div>
+      `;
+      document.getElementById('apiKeyBtn')?.addEventListener('click', () => {
+        const key = document.getElementById('apiKeyInput').value.trim();
+        if (!key) return;
+        setApiKey(key);
+        renderAssistant();
+      });
+      document.getElementById('apiKeyInput')?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') document.getElementById('apiKeyBtn')?.click();
+      });
+      // Disable chat until key is provided
+      document.getElementById('chatInput').disabled = true;
+      document.getElementById('chatSend').disabled = true;
+    }
+  }
+
   bindChatEvents();
   scrollChat();
-}
-
-function renderApiSetup() {
-  const provider = AI_PROVIDERS[currentProvider];
-  return `
-    <div class="api-setup">
-      <div class="api-setup-title">Connect ${provider.name} API</div>
-      <p>To power the AI assistant, enter your free ${provider.name} API key. Your key is stored locally in your browser and never sent to any server except ${provider.name}'s API.</p>
-      <div class="api-setup-row">
-        <input type="password" class="api-key-input" id="apiKeyInput" placeholder="Paste your API key here...">
-        <button class="api-key-btn" id="apiKeyBtn">Connect</button>
-      </div>
-      <p class="api-setup-hint">${provider.keyHint}</p>
-    </div>
-  `;
-}
-
-function renderApiStatus() {
-  const provider = AI_PROVIDERS[currentProvider];
-  const key = getApiKey(currentProvider);
-  const masked = key.substring(0, 6) + '•'.repeat(12) + key.slice(-4);
-  return `
-    <div class="api-status">
-      <span class="api-status-dot connected"></span>
-      <span>${provider.name} connected — ${masked}</span>
-      <button class="api-status-change" id="apiChangeBtn">Change Key</button>
-    </div>
-  `;
 }
 
 function renderWelcome() {
@@ -740,7 +765,7 @@ function renderWelcome() {
         <ul>
           <li>"Can Nafis build a website for my business?"</li>
           <li>"What experience does he have with React and Next.js?"</li>
-          <li>"I need a booking system — has he done something similar?"</li>
+          <li>"I need a booking system â€” has he done something similar?"</li>
         </ul>
         <p>I'll match your needs with <strong>real projects</strong> from his GitHub portfolio and provide direct links as evidence.</p>
       </div>
@@ -786,38 +811,11 @@ function scrollChat() {
   if (el) el.scrollTop = el.scrollHeight;
 }
 
-// ── Chat Events ──
+// â”€â”€ Chat Events â”€â”€
 function bindChatEvents() {
-  // Provider tabs
-  document.getElementById('providerTabs')?.addEventListener('click', (e) => {
-    const tab = e.target.closest('.provider-tab');
-    if (!tab) return;
-    currentProvider = tab.dataset.provider;
-    renderAssistant();
-  });
-
-  // API key connect
-  document.getElementById('apiKeyBtn')?.addEventListener('click', () => {
-    const input = document.getElementById('apiKeyInput');
-    const key = input.value.trim();
-    if (!key) return;
-    setApiKey(currentProvider, key);
-    renderAssistant();
-  });
-  document.getElementById('apiKeyInput')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') document.getElementById('apiKeyBtn')?.click();
-  });
-
-  // Change key
-  document.getElementById('apiChangeBtn')?.addEventListener('click', () => {
-    try { localStorage.removeItem(AI_PROVIDERS[currentProvider].storageKey); }
-    catch {}
-    renderAssistant();
-  });
-
-  // Send message
   const sendMsg = () => {
     const input = document.getElementById('chatInput');
+    if (!input) return;
     const text = input.value.trim();
     if (!text) return;
     input.value = '';
@@ -832,16 +830,15 @@ function bindChatEvents() {
   // Suggestions
   document.getElementById('chatSuggestions')?.addEventListener('click', (e) => {
     const btn = e.target.closest('.chat-suggestion');
-    if (!btn || !getApiKey(currentProvider)) return;
+    if (!btn) return;
+    const input = document.getElementById('chatInput');
+    if (input?.disabled) return;
     sendChatMessage(btn.dataset.q);
   });
 }
 
-// ── Send & Receive ──
+// â”€â”€ Send & Receive â”€â”€
 async function sendChatMessage(text) {
-  const apiKey = getApiKey(currentProvider);
-  if (!apiKey) return;
-
   // Add user message
   chatHistory.push({ role: 'user', content: text });
   const messagesEl = document.getElementById('chatMessages');
@@ -856,23 +853,32 @@ async function sendChatMessage(text) {
   if (inputEl) inputEl.disabled = true;
 
   try {
-    const provider = AI_PROVIDERS[currentProvider];
-    const reply = await provider.call(apiKey, chatHistory);
+    let reply;
+    if (serverMode) {
+      // Use Vercel serverless function
+      reply = await callServerAPI(chatHistory);
+    } else {
+      // Use client-side API key
+      const apiKey = getApiKey();
+      if (!apiKey) throw new Error('No API key configured');
+      reply = await callClientAPI(chatHistory, apiKey);
+    }
     chatHistory.push({ role: 'assistant', content: reply });
   } catch (err) {
     chatHistory.push({
       role: 'assistant',
-      content: `**Error:** ${err.message}\n\nPlease check your API key and try again.`
+      content: `**Error:** ${err.message}\n\nPlease try again or contact Nafis directly at workmail1803.ai@gmail.com`
     });
   }
 
-  // Remove typing, render all messages
+  // Render all messages
   messagesEl.innerHTML = chatHistory.map(m => renderMessage(m.role, m.content)).join('');
   scrollChat();
 
   if (sendBtn) sendBtn.disabled = false;
   if (inputEl) { inputEl.disabled = false; inputEl.focus(); }
 }
+
 
 // ── 404 ──
 function render404() {
@@ -885,20 +891,20 @@ function render404() {
   `;
 }
 
-// ── Helpers ──
+// â”€â”€ Helpers â”€â”€
 function formatRepoName(name) {
   return name
     .replace(/[-_]/g, ' ')
     .replace(/\b\w/g, c => c.toUpperCase());
 }
 
-// ── Mobile Nav Toggle ──
+// â”€â”€ Mobile Nav Toggle â”€â”€
 document.getElementById('navToggle').addEventListener('click', () => {
   document.getElementById('navLinks').classList.toggle('active');
   document.getElementById('navToggle').classList.toggle('active');
 });
 
-// ── Initialize ──
+// â”€â”€ Initialize â”€â”€
 window.addEventListener('hashchange', navigate);
 window.addEventListener('DOMContentLoaded', () => {
   if (!window.location.hash) window.location.hash = '#/home';
