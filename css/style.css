@@ -1084,17 +1084,20 @@ a:hover {
     top: var(--nav-height);
     left: 0;
     right: 0;
+    bottom: 0;
     background: var(--ink);
     flex-direction: column;
-    padding: 16px;
+    padding: 24px 16px;
     gap: 4px;
-    border-bottom: 3px solid var(--highlight);
+    border-top: 3px solid var(--highlight);
     transform: translateY(-120%);
-    transition: transform 0.3s ease;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
     z-index: 99;
   }
   .nav-links.active {
     transform: translateY(0);
+    opacity: 1;
   }
   .nav-toggle { display: flex; }
 
