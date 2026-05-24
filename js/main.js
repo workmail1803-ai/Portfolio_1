@@ -60,18 +60,42 @@ function getCategory(repo) {
 let reposCache = null;
 let readmeCache = {};
 
+// ── Static Fallback Data ──
+// Embedded snapshot so the site works when API is rate-limited or opened from file://
+const REPOS_FALLBACK = [
+  { name: 'Portfolio_1', language: 'CSS', description: '', html_url: 'https://github.com/workmail1803-ai/Portfolio_1', homepage: '', created_at: '2026-05-24T00:00:00Z', updated_at: '2026-05-24T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 50, fork: false },
+  { name: 'active_dream_bot', language: 'Python', description: '', html_url: 'https://github.com/workmail1803-ai/active_dream_bot', homepage: '', created_at: '2026-01-01T00:00:00Z', updated_at: '2026-05-20T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 120, fork: false },
+  { name: 'Flutter_Project', language: 'Dart', description: '', html_url: 'https://github.com/workmail1803-ai/Flutter_Project', homepage: '', created_at: '2025-06-01T00:00:00Z', updated_at: '2026-05-18T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 200, fork: false },
+  { name: 'ML_Project', language: 'Jupyter Notebook', description: '', html_url: 'https://github.com/workmail1803-ai/ML_Project', homepage: '', created_at: '2025-09-01T00:00:00Z', updated_at: '2026-05-15T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 5000, fork: false },
+  { name: 'Nextup', language: 'TypeScript', description: '', html_url: 'https://github.com/workmail1803-ai/Nextup', homepage: '', created_at: '2025-10-01T00:00:00Z', updated_at: '2026-05-14T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 800, fork: false },
+  { name: 'Fahim_Vai', language: 'TypeScript', description: '', html_url: 'https://github.com/workmail1803-ai/Fahim_Vai', homepage: '', created_at: '2025-11-01T00:00:00Z', updated_at: '2026-05-12T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 300, fork: false },
+  { name: 'Assignment_2_B13_Proggraming_Hero.', language: 'CSS', description: '', html_url: 'https://github.com/workmail1803-ai/Assignment_2_B13_Proggraming_Hero.', homepage: '', created_at: '2025-03-01T00:00:00Z', updated_at: '2026-05-10T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 20, fork: false },
+  { name: 'Mahin_Buiseness', language: 'HTML', description: 'A lecture slide For my student', html_url: 'https://github.com/workmail1803-ai/Mahin_Buiseness', homepage: '', created_at: '2025-08-01T00:00:00Z', updated_at: '2026-05-08T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 150, fork: false },
+  { name: 'Assignment_1_B13_Proggraming_Hero.', language: 'HTML', description: '', html_url: 'https://github.com/workmail1803-ai/Assignment_1_B13_Proggraming_Hero.', homepage: '', created_at: '2025-02-01T00:00:00Z', updated_at: '2026-05-06T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 15, fork: false },
+  { name: 'NUB_PAGE', language: 'TypeScript', description: '', html_url: 'https://github.com/workmail1803-ai/NUB_PAGE', homepage: '', created_at: '2025-12-01T00:00:00Z', updated_at: '2026-05-04T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 400, fork: false },
+  { name: 'Relief-Chain-', language: 'JavaScript', description: '', html_url: 'https://github.com/workmail1803-ai/Relief-Chain-', homepage: '', created_at: '2025-07-01T00:00:00Z', updated_at: '2026-04-28T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 600, fork: false },
+  { name: 'MIM_Project', language: 'HTML', description: '', html_url: 'https://github.com/workmail1803-ai/MIM_Project', homepage: '', created_at: '2025-05-01T00:00:00Z', updated_at: '2026-04-25T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 180, fork: false },
+  { name: 'ARAB', language: 'TypeScript', description: '', html_url: 'https://github.com/workmail1803-ai/ARAB', homepage: '', created_at: '2025-11-15T00:00:00Z', updated_at: '2026-04-20T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 500, fork: false },
+  { name: 'Redwan', language: 'TypeScript', description: '', html_url: 'https://github.com/workmail1803-ai/Redwan', homepage: '', created_at: '2025-10-15T00:00:00Z', updated_at: '2026-04-18T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 350, fork: false },
+  { name: 'Doctors_RX', language: 'TypeScript', description: '', html_url: 'https://github.com/workmail1803-ai/Doctors_RX', homepage: '', created_at: '2025-09-15T00:00:00Z', updated_at: '2026-04-15T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 450, fork: false },
+  { name: 'portfolio', language: 'HTML', description: '', html_url: 'https://github.com/workmail1803-ai/portfolio', homepage: '', created_at: '2025-01-01T00:00:00Z', updated_at: '2026-03-01T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 30, fork: false },
+  { name: 'prescription', language: 'JavaScript', description: '', html_url: 'https://github.com/workmail1803-ai/prescription', homepage: '', created_at: '2025-04-01T00:00:00Z', updated_at: '2026-02-15T00:00:00Z', stargazers_count: 0, forks_count: 0, size: 80, fork: false }
+];
+
 // ── GitHub API ──
 async function fetchRepos() {
   if (reposCache) return reposCache;
   try {
     const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`);
-    if (!res.ok) throw new Error('Failed to fetch repos');
+    if (!res.ok) throw new Error(`GitHub API returned ${res.status}`);
     const repos = await res.json();
     reposCache = repos.filter(r => !r.fork);
+    console.log(`✓ Loaded ${reposCache.length} repos from GitHub API`);
     return reposCache;
   } catch (err) {
-    console.error(err);
-    return [];
+    console.warn('GitHub API unavailable, using cached data:', err.message);
+    reposCache = REPOS_FALLBACK;
+    return reposCache;
   }
 }
 
@@ -364,9 +388,11 @@ async function renderProjectDetail(repoName) {
           ${readmeHtml}
         </div>
       ` : `
-        <div class="no-readme">
-          <div class="no-readme-icon">&#128196;</div>
-          <p>No README.md found for this repository.</p>
+        <div class="detail-readme">
+          <h2>About This Project</h2>
+          <p>${getDescription(repo)}</p>
+          <hr>
+          <p><em>The full README.md could not be loaded at this time. This may be due to GitHub API rate limiting or the repository not having a README file. Visit the <a href="${repo.html_url}" target="_blank">GitHub repository</a> to view the full source code and documentation.</em></p>
         </div>
       `}
     </div>
